@@ -6,11 +6,11 @@ using System.Reflection.Metadata;
 
 public class Program
 {
-    public Entry entryMain = new Entry();
+    public static Entry entryMain = new Entry();
 
-    public File fileMain = new File();
+    public static FileOrganize fileMain = new FileOrganize();
 
-    public void Main()
+    public static void Main()
     {
         Console.WriteLine("Welcome to the Journal Program! Here to help you keep up your consistent journaling habits!");
         bool run = true;

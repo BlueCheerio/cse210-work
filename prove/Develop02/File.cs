@@ -1,7 +1,7 @@
 using System.Reflection.Metadata;
 using System.IO;
 
-public class File
+public class FileOrganize
 {
     //Upload a file to a list that can be printed out later
     public void LoadFile(List<string> entrylist)
