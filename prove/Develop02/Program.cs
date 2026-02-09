@@ -73,7 +73,7 @@ public class Program
                     }
                     else
                     {
-                        Console.WriteLine("Please input a number from 1-4!\n");
+                        Console.WriteLine("Please input a number from 1-5!\n");
                     }
                 }
                 catch (FormatException)   // I looked up the exception for this part
