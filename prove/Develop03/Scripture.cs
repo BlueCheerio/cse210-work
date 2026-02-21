@@ -2,6 +2,7 @@ public class Scripture
 {
     private int _scripturenumber;
     private int _numberofverses;
+    private int _numberofwords = 0;
     private List<char> word = new List<char>();
     private Dictionary<int, Word> WordsinVerse = new Dictionary<int, Word>();
     private List<Word> VisibleWords = new List<Word>();
@@ -86,16 +87,15 @@ public class Scripture
     public void MakeScriptureWords(Dictionary<int, List<string>> Scriptures, int versenumber)
     {
         string verse = Scriptures[_scripturenumber][versenumber];
-        int i = 0;
         foreach (char c in verse)
         {
             if (c == ' ')
             {    
                 string wholeword = new string(word.ToArray());
-                WordsinVerse.Add(i, new Word(wholeword));
-                VisibleWords.Add(WordsinVerse[i]);
+                WordsinVerse.Add(_numberofwords, new Word(wholeword));
+                VisibleWords.Add(WordsinVerse[_numberofwords]);
                 word.Clear();
-                i++;
+                _numberofwords++;
             }
             else
             {
