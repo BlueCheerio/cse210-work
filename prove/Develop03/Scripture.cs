@@ -91,11 +91,12 @@ public class Scripture
     public void MakeScriptureWords(Dictionary<int, List<string>> Scriptures, int versenumber)
     {
         string verse = Scriptures[_scripturenumber][versenumber];
+        string wholeword;
         foreach (char c in verse)
         {
             if (c == ' ')
             {    
-                string wholeword = new string(word.ToArray());
+                wholeword = new string(word.ToArray());
                 WordsinVerse.Add(_numberofwords, new Word(wholeword));
                 VisibleWords.Add(WordsinVerse[_numberofwords]);
                 word.Clear();
@@ -105,6 +106,16 @@ public class Scripture
             {
                 word.Add(c);
             }
+        }
+
+        //We might have to add one more word at the end if there is no space after it
+        if (word.Any())
+        {
+        wholeword = new string(word.ToArray());
+        WordsinVerse.Add(_numberofwords, new Word(wholeword));
+        VisibleWords.Add(WordsinVerse[_numberofwords]);
+        word.Clear();
+        _numberofwords++;
         }
     }
 }
