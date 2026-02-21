@@ -60,7 +60,7 @@ class Program
         }
 
         //We must initialize the words in each verse of the scripture. Because the reference is stored at 0 we must start at 1
-        for (int i = 1; i >= numberofverses; i++)
+        for (int i = 1; i <= numberofverses; i++)
         {
             TheScripture.MakeScriptureWords(AllScriptures, i);
         }
