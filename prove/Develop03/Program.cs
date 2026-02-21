@@ -78,14 +78,6 @@ class Program
 
         while (memorizing)
         {
-            //Check to see if there are any words still not hidden, We do this at the start because we want
-            //the user to still memorize the verse even when nothing is showing, then when the press enter
-            //for the last time the program will finally end
-            if (!TheScripture.StillWordsLeft())
-            {
-                break;
-            }
-
             //Read the user input
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
             if (keyInfo.Key == ConsoleKey.Enter)
@@ -96,6 +88,15 @@ class Program
                 }
                 else if (currentreading == "")
                 {
+                    //Check to see if there are any words still not hidden, We do this at the start because we want
+                    //the user to still memorize the verse even when nothing is showing, then when the press enter
+                    //for the last time the program will finally end
+                    if (!TheScripture.StillWordsLeft())
+                    {
+                        break;
+                    }
+
+                    //Reset the screen
                     TheScripture.SetWordsInvisible();
                     Console.Clear();
                     TheScripture.DisplayScripture(AllScriptures);
