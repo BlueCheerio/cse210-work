@@ -8,8 +8,8 @@ class Program
     private static Dictionary<int, List<string>> AllScriptures = new Dictionary<int, List<string>>()
     {
         { 0, new List<string> {"John 3:16", "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."}},
-        { 1, new List<string> {""}},
-        { 2, new List<string> {}}
+        { 1, new List<string> {"Ether 12:4", "Wherefore, whoso believeth in God might with surety hope for a better world, yea, even a place at the right hand of God, which hope cometh of faith, maketh an anchor to the souls of men, which would make them sure and steadfast, always abounding in good works, being led to glorify God"}},
+        { 2, new List<string> {"D&C 10:67-68", "Behold, this is my doctrine whosoever repenteth and cometh unto me, the same is my church", "Whosoever declareth more or less than this, the same is not of me, but is against me; therefore he is not of my church"}}
     };
 
     //Create an instance of our menu
