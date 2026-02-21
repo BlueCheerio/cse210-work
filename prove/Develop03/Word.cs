@@ -47,10 +47,11 @@ public class Word
     public void MakeHidden()
     {
         hidden = true;
+        letters.Clear();
         foreach (char letter in _itself)
         {
             hiddenletters.Add(letter);
-            letters[letter] = '_';
+            letters.Add('_');
         }
         _itself = new string (hiddenletters.ToArray());
     }

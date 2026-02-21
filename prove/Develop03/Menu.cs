@@ -2,6 +2,7 @@ public class Menu
 {
     public void StartMenu()
     {
+        Console.Clear();
         Console.WriteLine("-----Welcome to the Scripture Memorizer Program!-----\n");
     }
     public int DisplayMenu()

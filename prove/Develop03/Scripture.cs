@@ -4,6 +4,9 @@ public class Scripture
     private int _numberofverses;
     private int _numberofwords = 0;
     private List<char> word = new List<char>();
+    
+    //This dictionary is overkill but it would allow for the program to be easily added onto in the future.
+    //I was dreaming a little beyond my time constraints when I started this program.
     private Dictionary<int, Word> WordsinVerse = new Dictionary<int, Word>();
     private List<Word> VisibleWords = new List<Word>();
     private Random randomm = new Random();
@@ -74,10 +77,11 @@ public class Scripture
         for (int i = 0; i < werevisible; i++)
         {
             int goinvisible = randomm.Next(VisibleWords.Count);
-            //This is to ensure that we don't keep making the same word "Invisible"
-            if (!WordsinVerse[goinvisible].CheckHidden())
+            //This is to ensure that we don't keep making the same word "Invisible". This is a little overkill but it
+            //could be added onto easily in the future to allow words to reappear easily
+            if (!VisibleWords[goinvisible].CheckHidden())
             {
-                WordsinVerse[goinvisible].MakeHidden();
+                VisibleWords[goinvisible].MakeHidden();
                 VisibleWords.RemoveAt(goinvisible);
             }
         }
