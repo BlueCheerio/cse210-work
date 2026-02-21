@@ -71,6 +71,11 @@ class Program
         //This is where we can check if the user ever types "quit"
         string currentreading = "";
 
+        //Print out the screen (or initialize the user experience)
+        Console.Clear();
+        TheScripture.DisplayScripture(AllScriptures);
+        menu.DiplayKeyChoices();
+
         while (memorizing)
         {
             //Check to see if there are any words still not hidden, We do this at the start because we want
@@ -80,11 +85,6 @@ class Program
             {
                 break;
             }
-
-            //Print out the screen
-            Console.Clear();
-            TheScripture.DisplayScripture(AllScriptures);
-            menu.DiplayKeyChoices();
 
             //Read the user input
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
@@ -97,6 +97,9 @@ class Program
                 else if (currentreading == "")
                 {
                     TheScripture.SetWordsInvisible();
+                    Console.Clear();
+                    TheScripture.DisplayScripture(AllScriptures);
+                    menu.DiplayKeyChoices();
                 }
 
                 //This will clear what we have registered as the user inputs so far

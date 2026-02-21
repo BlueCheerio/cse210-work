@@ -53,7 +53,7 @@ public class Word
             hiddenletters.Add(letter);
             letters.Add('_');
         }
-        _itself = new string (hiddenletters.ToArray());
+        _itself = new string (letters.ToArray());
     }
 
 }
