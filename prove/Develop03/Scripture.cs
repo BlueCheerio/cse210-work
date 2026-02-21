@@ -4,7 +4,7 @@ public class Scripture
     private int _numberofverses;
     private int _numberofwords = 0;
     private List<char> word = new List<char>();
-    
+
     //This dictionary is overkill but it would allow for the program to be easily added onto in the future.
     //I was dreaming a little beyond my time constraints when I started this program.
     private Dictionary<int, Word> WordsinVerse = new Dictionary<int, Word>();
@@ -21,8 +21,8 @@ public class Scripture
     //Constructor #2, sets up the scripture if the user wants to input their own
     public Scripture(string reference, string verse, Dictionary<int, List<string>> Scriptures)
     {
-        Scriptures.Add(Scriptures.Count, new List<string>{reference, verse});
         _scripturenumber = Scriptures.Count;
+        Scriptures.Add(Scriptures.Count, new List<string>{reference, verse});
     }
 
     //We check to see if there are still words to hide here, if not it will return a false value that will make the program end.
