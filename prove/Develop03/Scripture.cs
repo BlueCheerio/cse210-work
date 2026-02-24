@@ -19,10 +19,10 @@ public class Scripture
     }
 
     //Constructor #2, sets up the scripture if the user wants to input their own
-    public Scripture(string reference, string verse, Dictionary<int, List<string>> Scriptures)
+    public Scripture(Reference reference, string verse, Dictionary<int, List<string>> Scriptures)
     {
         _scripturenumber = Scriptures.Count;
-        Scriptures.Add(Scriptures.Count, new List<string>{reference, verse});
+        Scriptures.Add(Scriptures.Count, new List<string>{reference.GetReference(), verse});
     }
 
     //We check to see if there are still words to hide here, if not it will return a false value that will make the program end.

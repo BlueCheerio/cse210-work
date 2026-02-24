@@ -2,6 +2,13 @@ using System;
 using System.ComponentModel.Design;
 using System.Security.Cryptography.X509Certificates;
 
+
+/* This program is a little bit beyond what the rubric asks for. There are some functions (especially in the word class)
+that I don't end up using because initially I was going to add a way to ask for a 'hint'. Or in other words
+to make words reappear instead of disappear altogther. This means that my program has a dictionary that it doesn't
+need in the scripture class and some functions and bools in the words class that don't end up getting used so please
+don't mark me down for that. */
+
 class Program
 {
     //This is our scripture bank, it allows us to store some default scriptures to memorize
@@ -14,6 +21,9 @@ class Program
 
     //Create an instance of our menu
     private static Menu menu = new Menu();
+
+    //Create an instance of our reference that we will use
+    public static Reference reference = new Reference();
 
     static void Main(string[] args)
     {
@@ -39,14 +49,14 @@ class Program
             //We need to collect the scripture reference, number of verses, and each verse from the user in order to create their custom scripture
             //I would make this a lot more case sensitive if I wanted it to be cool and i had more time
             Console.Write("Please type the scripture reference: ");
-            string scripturereference = Console.ReadLine();
+            reference.SetReference(Console.ReadLine());
             Console.Write("Please input the number of verses in the scripture (A number): ");
             numberofverses = int.Parse(Console.ReadLine());
             Console.WriteLine("Input the first verse (or only verse if there is one): ");
             string verse = Console.ReadLine();
 
             //Use the second Scripture constructor
-            TheScripture = new Scripture(scripturereference, verse, AllScriptures);
+            TheScripture = new Scripture(reference, verse, AllScriptures);
 
             //If the user wants to memorize multiple verses they need to input them seperately (makes it easy to organize)
             if (numberofverses > 1)
