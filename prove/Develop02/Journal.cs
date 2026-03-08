@@ -13,14 +13,14 @@ public class Journal
     //For use when the user wants to respond to a new prompt
     public void NewPrompt()
     {
-        promptlist[promptlist.Count] = new Prompt();
+        promptlist.Add(new Prompt());
         promptlist[promptlist.Count - 1].GeneratePrompt();
     }
 
     //For use when the user has entered a new entry
     public void NewEntry()
     {
-        entrylist[entrylist.Count] = new Entry();
+        entrylist.Add(new Entry());
         entrylist[entrylist.Count - 1].SetEntry(Console.ReadLine());
         datelist[datelist.Count] = $"{DateTime.Now}";
     }
@@ -61,7 +61,7 @@ public class Journal
         entrylist.Clear();
         promptlist.Clear();
         datelist.Clear();
-        
+
         Console.WriteLine("What is the name of the journal you would like to upload? (You don't have to add .txt)\n");
         string userinput = Console.ReadLine();
         if (userinput.Contains(".txt"))          // I looked up this particular piece of code to make sure that a file is created no matter what
