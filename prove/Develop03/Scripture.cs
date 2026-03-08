@@ -1,7 +1,5 @@
 public class Scripture
 {
-    private int _scripturenumber;
-    private int _numberofverses;
     private int _numberofwords = 0;
     private List<char> word = new List<char>();
 
@@ -10,20 +8,6 @@ public class Scripture
     private Dictionary<int, Word> WordsinVerse = new Dictionary<int, Word>();
     private List<Word> VisibleWords = new List<Word>();
     private Random randomm = new Random();
-
-    //Constructor #1, the default constructor if the user doesn't input a custom scripture
-    public Scripture(Dictionary<int, List<string>> Scriptures)
-    {
-        _scripturenumber = randomm.Next(Scriptures.Count);
-        _numberofverses = Scriptures[_scripturenumber].Count - 1;   
-    }
-
-    //Constructor #2, sets up the scripture if the user wants to input their own
-    public Scripture(Reference reference, string verse, Dictionary<int, List<string>> Scriptures)
-    {
-        _scripturenumber = Scriptures.Count;
-        Scriptures.Add(Scriptures.Count, new List<string>{reference.GetReference(), verse});
-    }
 
     //We check to see if there are still words to hide here, if not it will return a false value that will make the program end.
     public bool StillWordsLeft()
@@ -38,17 +22,10 @@ public class Scripture
         }
     }
 
-    //We only use this when Constructor #1 is called, if the user creates their own scripture
-    //the number of verses is kept in the Program class.
-    public int GetNumberVerses()
-    {
-        return _numberofverses;
-    }
-
     //Print out the whole scripture, the function calls each words instance to print itself out
-    public void DisplayScripture(Dictionary<int, List<string>> Scriptures)
+    public void DisplayScripture(Dictionary<int, List<string>> Scriptures, Reference TheReference)
     {
-        Console.WriteLine(Scriptures[_scripturenumber][0]);
+        Console.WriteLine(Scriptures[TheReference.GetScriptureNumber()][0]);
         for (int i = 0; i < WordsinVerse.Count; i++)
         {
             WordsinVerse[i].DisplayWord();
@@ -88,9 +65,9 @@ public class Scripture
     }
 
     //This will make all instances of the Words in the scripture
-    public void MakeScriptureWords(Dictionary<int, List<string>> Scriptures, int versenumber)
+    public void MakeScriptureWords(Dictionary<int, List<string>> Scriptures, int versenumber, Reference TheReference)
     {
-        string verse = Scriptures[_scripturenumber][versenumber];
+        string verse = Scriptures[TheReference.GetScriptureNumber()][versenumber];
         string wholeword;
         foreach (char c in verse)
         {

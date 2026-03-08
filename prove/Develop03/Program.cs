@@ -6,12 +6,13 @@ using System.Security.Cryptography.X509Certificates;
 /* This program is a little bit beyond what the rubric asks for. There are some functions (especially in the word class)
 that I don't end up using because initially I was going to add a way to ask for a 'hint'. Or in other words
 to make words reappear instead of disappear altogther. This means that my program has a dictionary that it doesn't
-need in the scripture class and some functions and bools in the words class that don't end up getting used so please
-don't mark me down for that. */
+need in the scripture class and some functions and bools in the words class that don't end up getting used so just 
+try to cypher through that. */
 
 class Program
 {
-    //This is our scripture bank, it allows us to store some default scriptures to memorize
+    //This is our scripture bank, it allows us to store some default scriptures to memorize (It is not the scriptures themselves, just preset ones that can be passed to the Scripture class)
+    //Granted, this could just use the reference as the key, but I like it this way because it demonstrates how the Reference would construct itself when passed a string
     private static Dictionary<int, List<string>> AllScriptures = new Dictionary<int, List<string>>()
     {
         { 0, new List<string> {"John 3:16", "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."}},
@@ -22,9 +23,6 @@ class Program
     //Create an instance of our menu
     private static Menu menu = new Menu();
 
-    //Create an instance of our reference that we will use
-    public static Reference reference = new Reference();
-
     static void Main(string[] args)
     {
         //Display the starting options to the user (this could be added onto to make it a whole loop program)
@@ -34,45 +32,35 @@ class Program
         //We are assuming that each scripture has at least one verse, we must initialize this outside the if/else statement to use it later
         int numberofverses = 1;
 
-        //Create a null instance of the scripture before we even set it, that way we can use it outside the brackets
-        Scripture TheScripture = null;
+        //Create a null instance of the reference before we even set it, that way we can use it outside the brackets
+        Reference TheReference = null;
+        Scripture TheScripture = new Scripture();
 
         //If else block for using the different Scripture constructors
         if (menuchoice == 1)
         {
-            //Select one of the 3 default scriptures
-            TheScripture = new Scripture(AllScriptures);
-            numberofverses = TheScripture.GetNumberVerses();
+            //Select one of the 3 default scriptures through the 1st reference constructor
+            TheReference = new Reference(AllScriptures);
+            numberofverses = TheReference.GetNumberVerses(); //We use this later
         }
         else if (menuchoice == 2)
         {
             //We need to collect the scripture reference, number of verses, and each verse from the user in order to create their custom scripture
             //I would make this a lot more case sensitive if I wanted it to be cool and i had more time
             Console.Write("Please type the scripture reference: ");
-            reference.SetReference(Console.ReadLine());
+            string temporaryreference = Console.ReadLine();
             Console.Write("Please input the number of verses in the scripture (A number): ");
             numberofverses = int.Parse(Console.ReadLine());
             Console.WriteLine("Input the first verse (or only verse if there is one): ");
             string verse = Console.ReadLine();
 
-            //Use the second Scripture constructor
-            TheScripture = new Scripture(reference, verse, AllScriptures);
-
-            //If the user wants to memorize multiple verses they need to input them seperately (makes it easy to organize)
-            if (numberofverses > 1)
-            {
-                for (int i = 1; i < numberofverses; i++)
-                {
-                    Console.WriteLine("Please input the next verse: ");
-                    AllScriptures[AllScriptures.Count - 1].Add(Console.ReadLine());
-                }
-            }
+            TheReference = new Reference(temporaryreference, verse, AllScriptures);  
         }
 
         //We must initialize the words in each verse of the scripture. Because the reference is stored at 0 we must start at 1
         for (int i = 1; i <= numberofverses; i++)
         {
-            TheScripture.MakeScriptureWords(AllScriptures, i);
+            TheScripture.MakeScriptureWords(AllScriptures, i, TheReference);
         }
 
         //Now the user starts the "memorization"
@@ -83,7 +71,7 @@ class Program
 
         //Print out the screen (or initialize the user experience)
         Console.Clear();
-        TheScripture.DisplayScripture(AllScriptures);
+        TheScripture.DisplayScripture(AllScriptures, TheReference);
         menu.DiplayKeyChoices();
 
         while (memorizing)
@@ -109,7 +97,7 @@ class Program
                     //Reset the screen
                     TheScripture.SetWordsInvisible();
                     Console.Clear();
-                    TheScripture.DisplayScripture(AllScriptures);
+                    TheScripture.DisplayScripture(AllScriptures, TheReference);
                     menu.DiplayKeyChoices();
                 }
 
