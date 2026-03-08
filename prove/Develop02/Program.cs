@@ -6,36 +6,31 @@ using System.Reflection.Metadata;
 
 public class Program
 {
-    public static Entry entryMain = new Entry();
-
-    public static FileOrganize fileMain = new FileOrganize();
+    public static Journal journalMain = new Journal();
 
     public static void Main()
     {
         Console.WriteLine("Welcome to the Journal Program! Here to help you keep up your consistent journaling habits!");
-        bool run = true;
 
-        while (run)
+        while (true)
         {
             int menuinput = DisplayMenu();
             if (menuinput == 1)
             {
-                string prompt = entryMain.EntryPrompt();
-                Console.WriteLine(prompt);
-                entryMain._entry = Console.ReadLine();
-                entryMain.SaveEntry(prompt, entryMain._entry, entryMain.entrylist);
+                journalMain.NewPrompt(); //This creates and saves a new prompt class and prints itself
+                journalMain.NewEntry(); //Creates a new entry that will read and save what the user types
             }
             else if (menuinput == 2)
             {
-                entryMain.EntryPrint(entryMain.entrylist);
+                journalMain.PrintSelf();
             }
             else if (menuinput == 3)
             {
-                fileMain.SaveFile(entryMain.entrylist);
+                journalMain.SaveJournal(); //Journal saves itself to a file
             }
             else if (menuinput == 4)
             {
-                fileMain.LoadFile(entryMain.entrylist);
+                journalMain.LoadJournal(); //Journal will clear it's lists and upload lists from a saved file
             }
             else if (menuinput == 5)
             {
@@ -43,8 +38,8 @@ public class Program
                 string input = Console.ReadLine();
                 if (input == "y")
                 {
-                    run = false;
                     Console.WriteLine("\nThank you for writing in your journal today! See you soon!");
+                    break;
                 }
                 else
                 {
