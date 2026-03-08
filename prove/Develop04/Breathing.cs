@@ -12,7 +12,7 @@ public class Breathing : Activity
         while(true)
         {
             //The Breathing Activity
-            if (_now < _finish)
+            if (DateTime.Now < _finish)
             {
                 Console.WriteLine("Breath in...");
                 Console.Write(5);
@@ -21,12 +21,13 @@ public class Breathing : Activity
                     Thread.Sleep(1000);
                     Console.Write($"\b{i}");
                 }
+                Console.Write($"\b \b");
             }
             else
             {
                 break;
             }
-            if (_now < _finish)
+            if (DateTime.Now < _finish)
             {
                 Console.WriteLine("Breath out...");
                 Console.Write(5);
@@ -35,6 +36,7 @@ public class Breathing : Activity
                     Thread.Sleep(1000);
                     Console.Write($"\b{i}");
                 }
+                Console.Write($"\b \b");
             }
             else
             {

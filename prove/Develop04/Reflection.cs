@@ -29,7 +29,7 @@ public class Reflection : Activity
         while(true)
         {
             //The actual Reflection activity
-            if(_now<_finish)
+            if(DateTime.Now < _finish)
             {
                 Console.WriteLine(_questions[giveMeRandom.Next(_questions.Count)]);
             }
@@ -42,7 +42,7 @@ public class Reflection : Activity
             for(int i = 0; i < 5; i++)
             {
                 //A double check while loading
-                if(_now<_finish)
+                if(DateTime.Now < _finish)
                 {
                     Console.Write("-");
                     Thread.Sleep(250);

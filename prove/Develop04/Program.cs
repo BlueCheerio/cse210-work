@@ -7,6 +7,7 @@ class Program
         while(true)
         {
             //Menu start
+            Console.Clear();
             Console.WriteLine("Please choose an activty to do:");
             Console.WriteLine("1. Breathing");
             Console.WriteLine("2. Reflection");
@@ -43,11 +44,9 @@ class Program
             if (Console.ReadLine() == "y")
             {
                 Thread.Sleep(200);
-                Console.Clear();
             }
             else
             {
-                Console.Clear();
                 break;
             }
         }

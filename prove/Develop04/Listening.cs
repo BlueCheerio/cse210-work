@@ -30,7 +30,7 @@ public class Listening : Activity
         while(true)
         {
             //Actual listening activity
-            if(_now<_finish)
+            if(DateTime.Now < _finish)
             {
                 _userInputs.Add(Console.ReadLine());
             }

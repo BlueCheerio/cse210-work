@@ -9,7 +9,7 @@ public class Activity
     private string _name;
     protected string _description;
     protected int _duration;
-    protected DateTime _now;
+    private DateTime _now;
     protected DateTime _finish;
     private void LoadCharacter()
     {
@@ -123,11 +123,6 @@ public class Activity
         Console.SetCursorPosition(17, currentrow - 3);
         WriteCharacter();
 
-
-        Console.WriteLine(_duration);
-        Console.WriteLine(_now);
-        Console.WriteLine(_finish);
-        Console.WriteLine(actualTime);
         Thread.Sleep(2000);
     }
 }
