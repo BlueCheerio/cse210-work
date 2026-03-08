@@ -21,6 +21,7 @@ public class Breathing : Activity
                     Thread.Sleep(1000);
                     Console.Write($"\b{i}");
                 }
+                Thread.Sleep(1000);
                 Console.Write($"\b \b");
             }
             else

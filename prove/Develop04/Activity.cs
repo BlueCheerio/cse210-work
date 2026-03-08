@@ -11,6 +11,7 @@ public class Activity
     protected int _duration;
     private DateTime _now;
     protected DateTime _finish;
+    protected Random giveMeRandom = new Random();
     private void LoadCharacter()
     {
         //Used in the OpeningDisplay

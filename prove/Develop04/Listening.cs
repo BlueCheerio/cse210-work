@@ -14,6 +14,7 @@ public class Listening : Activity
         _description = "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.";
         OpeningDisplay();
         InitializeTime();
+        Console.WriteLine(_prompts[giveMeRandom.Next(_prompts.Count)]);
         Console.WriteLine("Think about some answers (When the time runs out write as many as you can think of)");
         for(int i = 5; i > 0; i--)
         {

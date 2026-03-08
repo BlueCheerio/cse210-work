@@ -1,6 +1,5 @@
 public class Reflection : Activity
 {
-    private Random giveMeRandom = new Random();
     private List<string> _prompts = new List<string>{
         "Think of a time when you stood up for someone else.",
         "Think of a time when you did something really difficult.",
@@ -39,7 +38,7 @@ public class Reflection : Activity
             }
 
             //Thinking animation
-            for(int i = 0; i < 5; i++)
+            for(int i = 0; i < 10; i++)
             {
                 //A double check while loading
                 if(DateTime.Now < _finish)
