@@ -78,7 +78,7 @@ public class Journal
         int totalLines = 0;
         while (true)
         {
-            if (lines.Length < totalLines)
+            if (lines.Length <= totalLines)
             {
                 break;
             }

@@ -28,10 +28,12 @@ public class Program
             else if (menuinput == 3)
             {
                 journalMain.SaveJournal(); //Journal saves itself to a file
+                Thread.Sleep(2000);
             }
             else if (menuinput == 4)
             {
                 journalMain.LoadJournal(); //Journal will clear it's lists and upload lists from a saved file
+                Thread.Sleep(2000);
             }
             else if (menuinput == 5)
             {
