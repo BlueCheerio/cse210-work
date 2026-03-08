@@ -86,10 +86,10 @@ public class Journal
             {
                 datelist.Add(lines[totalLines]);
                 totalLines++;
-                promptlist[promptlist.Count] = new Prompt();
+                promptlist.Add(new Prompt());
                 promptlist[promptlist.Count - 1].SetPrompt(lines[totalLines]);
                 totalLines++;
-                entrylist[entrylist.Count] = new Entry();
+                entrylist.Add(new Entry());
                 entrylist[entrylist.Count - 1].SetEntry(lines[totalLines]);
                 totalLines++;
             }

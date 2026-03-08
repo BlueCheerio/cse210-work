@@ -23,6 +23,7 @@ public class Program
             else if (menuinput == 2)
             {
                 journalMain.PrintSelf();
+                Thread.Sleep(3000); //Give the user a second to read the journal before printing the menu again
             }
             else if (menuinput == 3)
             {
