@@ -19,7 +19,7 @@ public class Reflection : Activity
     };
     public Reflection(string name, int duration) : base(name, duration)
     {
-        //We don't need to call a function when the instance can just run itself
+        //Start the activity
         _description = "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.";
         OpeningDisplay();
         InitializeTime();

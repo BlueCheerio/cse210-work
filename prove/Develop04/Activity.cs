@@ -2,7 +2,8 @@ using System.Runtime.CompilerServices;
 
 
 //Note: An activty wont finish exactly on time, I beleive it is important for the user to finish their thought and then it will end.
-//I also decided that activties would run straight from their constructors
+//I also decided that activties would run straight from their constructors and they don't have to be named because each
+//time the user does that activty they create a new instance of it anyway with new parameters
 //I chose to use protected variables instead of Getters and Setters because it means I write less code
 public class Activity
 {

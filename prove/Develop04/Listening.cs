@@ -10,12 +10,13 @@ public class Listening : Activity
     private List<string> _userInputs = new List<string>();
     public Listening(string name, int duration) : base(name, duration)
     {
-        //The activty runs straight from the constructor
+        //Start activity
         _description = "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.";
         OpeningDisplay();
         InitializeTime();
         Console.WriteLine(_prompts[giveMeRandom.Next(_prompts.Count)]);
         Console.WriteLine("Think about some answers (When the time runs out write as many as you can think of)");
+
         for(int i = 5; i > 0; i--)
         {
             //Waiting display
@@ -30,7 +31,7 @@ public class Listening : Activity
 
         while(true)
         {
-            //Actual listening activity
+            //Actual listening activity, user input here
             if(DateTime.Now < _finish)
             {
                 _userInputs.Add(Console.ReadLine());

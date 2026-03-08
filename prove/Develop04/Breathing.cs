@@ -4,14 +4,14 @@ public class Breathing : Activity
 {
     public Breathing(string name, int duration) : base(name, duration)
     {
-        //I decided that I don't actually need a run function, we can simply run the class when it is constructed
+        //Start the activty with opening display and start counting time
         _description = "This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.";
         OpeningDisplay();
         InitializeTime();
-
         while(true)
         {
             //The Breathing Activity
+            Console.Clear();
             if (DateTime.Now < _finish)
             {
                 Console.WriteLine("Breath in...");
@@ -37,6 +37,7 @@ public class Breathing : Activity
                     Thread.Sleep(1000);
                     Console.Write($"\b{i}");
                 }
+                Thread.Sleep(1000); 
                 Console.Write($"\b \b");
             }
             else
