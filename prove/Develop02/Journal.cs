@@ -22,7 +22,7 @@ public class Journal
     {
         entrylist.Add(new Entry());
         entrylist[entrylist.Count - 1].SetEntry(Console.ReadLine());
-        datelist[datelist.Count] = $"{DateTime.Now}";
+        datelist.Add($"{DateTime.Now}");
     }
 
     //This function makes the journal display itself
