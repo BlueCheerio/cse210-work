@@ -17,6 +17,6 @@ public class EternalGoal : Goal
     }
     public override void PrintDetails()
     {
-        Console.Write($"Name: {base.GetName()}\nDescription: {base.GetDescription()}\nCompleted: {_timesCompleted} times\nPoints Earned from this Goal: {base.GetScore()}\n");
+        Console.WriteLine($"Name: {base.GetName()}\nDescription: {base.GetDescription()}\nCompleted: {_timesCompleted} times\nPoints Earned from this Goal: {base.GetScore()}\n");
     }
 }
