@@ -2,25 +2,24 @@ using System.Diagnostics.Contracts;
 
 public abstract class Goal
 {
-    private int _pointsEarned;
+    private int _pointsEarned; //This is just a cool varibale to caculate the amount of points a goal has given a player, it is not the total score
     private string _name;
     private string _description;
+    private bool _complete;
     private DateTime _dateCompleted;
-    protected int _pointsAwarded;
+    protected int _timesCompleted; //This variable and the next get called so many times I'll just set them protected
+    protected int _pointsAwarded; //This is how many points a player will earn if they complete the goal
 
-    //These two variables are used in 2 classes each and so they are passed and set in those classes when needed
-    protected int _timesCompleted;
-    protected bool _complete;
 
     public Goal(string name, string description)
     {
         _name = name;
         _description = description;
         _pointsEarned = 0;
-        _timesCompleted = 0;
 
     }
 
+    //Our virtual functions that each child class uses
     public virtual void PrintDetails(){}
     public virtual void AddPoints(){}
 
@@ -30,15 +29,13 @@ public abstract class Goal
         _complete = true;
         _dateCompleted = DateTime.Now;
     }
-    public DateTime GetTimeCompleted()
+
+    //Getters
+    public DateTime GetDateCompleted()
     {
         return _dateCompleted;
     }
-    public void SetTimeCompleted(DateTime timeCompleted)
-    {
-        _dateCompleted = timeCompleted;
-    }
-    public int GetTimesCompleted()
+    public virtual int GetTimesCompleted()
     {
         return _timesCompleted;
     }
@@ -46,10 +43,13 @@ public abstract class Goal
     {
         return _complete;
     }
-
     public string GetName()
     {
         return _name;
+    }
+    public string GetDescription()
+    {
+        return _description;
     }
     public int GetScore()
     {
@@ -59,13 +59,24 @@ public abstract class Goal
     {
         return _pointsAwarded;
     }
+
+    //Setters
+    public void SetDateCompleted(DateTime dateCompleted)
+    {
+        _dateCompleted = dateCompleted;
+    }
+    public void SetTimesCompleted(int timesCompleted)
+    {
+        
+    }
     public void SetScore(int points)
     {
         _pointsEarned = points;
     }
-    public string GetDescription()
+    public void SetComplete(bool complete)
     {
-        return _description;
+        //Slightly different from Mark complete, which adds points to the points earned variable
+        _complete = complete;
     }
 
 

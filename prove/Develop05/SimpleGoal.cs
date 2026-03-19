@@ -4,7 +4,7 @@ public class SimpleGoal : Goal
 {
     public SimpleGoal(string name, string description) : base(name, description)
     {
-        _complete = false;
+        base.SetComplete(false);
         _pointsAwarded = 500;
     }
 
@@ -17,7 +17,7 @@ public class SimpleGoal : Goal
         Console.Write($"Name: {base.GetName()}\nDescription: {base.GetDescription()}\nComplete: {base.CheckComplete()}\nPoints Earned from this Goal: {base.GetScore()}\n");
         if (base.CheckComplete())
         {
-            Console.WriteLine($"Date Completed: {base.GetTimeCompleted()}\n");
+            Console.WriteLine($"Date Completed: {base.GetDateCompleted()}\n");
         }
         else
         {

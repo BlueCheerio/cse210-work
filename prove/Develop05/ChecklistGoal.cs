@@ -4,7 +4,7 @@ public class ChecklistGoal : Goal
 
     public ChecklistGoal(string name, string description, int timesToComplete) : base(name, description)
     {
-        _complete = false;
+        base.SetComplete(false);
         _timesToComplete = timesToComplete;
         _pointsAwarded = 50;
     }
@@ -23,8 +23,8 @@ public class ChecklistGoal : Goal
         else if (_timesCompleted == _timesToComplete)
         {
             base.SetScore(base.GetScore() + _pointsAwarded * 10);
-            _complete = true;
-            base.SetTimeCompleted(DateTime.Now);
+            base.SetComplete(false);
+            base.SetDateCompleted(DateTime.Now);
         }
     }
     public override void PrintDetails()
@@ -36,8 +36,18 @@ public class ChecklistGoal : Goal
         }
         else
         {
-            Console.WriteLine($"Date Milestone was reached: {base.GetTimeCompleted()}\n");
+            Console.WriteLine($"Date Milestone was reached: {base.GetDateCompleted()}\n");
         }
+    }
+
+    //These 2 functions are only used when saving and loading a ChecklistGoal
+    public int GetTimesToComplete()
+    {
+        return _timesToComplete;
+    }
+    public void SetTimesToComplete(int timesToComplete)
+    {
+        _timesToComplete = timesToComplete;
     }
 
 }

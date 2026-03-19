@@ -16,26 +16,27 @@ class Program
             {
                 //Starting menu conditions
                 Console.Clear();
-                Console.WriteLine("-----Welcome to the Goal Program-----\n");
+                Console.WriteLine("-----Welcome to the Goal Program-----");
                 Console.WriteLine("Please select an option:");
                 Console.WriteLine("1. Create a new Goal");
                 Console.WriteLine("2. Report progress on a goal");
                 Console.WriteLine("3. Save Goals");
                 Console.WriteLine("4. Load Goals");
                 Console.WriteLine("5. Print Goals");
-                Console.WriteLine("6. Quit Program");
-                Console.WriteLine("Please input 1-6: ");
+                Console.WriteLine("6. Delete a Goal");
+                Console.WriteLine("7. Quit Program");
+                Console.WriteLine("Please input 1-7: ");
                 userInput = Console.ReadLine();
 
                 //Make sure the input is valid, otherwise repeat menu
-                if(userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4" || userInput == "5" || userInput == "6")
+                if(userInput == "1" || userInput == "2" || userInput == "3" || userInput == "4" || userInput == "5" || userInput == "6" || userInput == "7")
                 {
                     Console.Clear();
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("Please Input a 1, 2, 3, 4, or 5");
+                    Console.WriteLine("Please Input a 1, 2, 3, 4, 5, 6, or 7");
                     Thread.Sleep(2000);
                 }
             }
@@ -53,11 +54,11 @@ class Program
                         Console.WriteLine("Please select one of the following goals to create:");
                         Console.WriteLine("1. Simple Goal (Complete once)");
                         Console.WriteLine("2. Checklist Goal (Complete a few times)");
-                        Console.WriteLine("1. Eternal Goal (Never Completed)");
+                        Console.WriteLine("3. Eternal Goal (Never Completed)");
                         userInput = Console.ReadLine();
 
                         //Ensure user input is valid, otherwise they repeat
-                        if (userInput == "1" || userInput == "1" || userInput == "1")
+                        if (userInput == "1" || userInput == "2" || userInput == "3")
                         {
                             Console.Clear();
                             break;
@@ -183,12 +184,126 @@ class Program
 
                 case 3:
                 //Save the current Goals list
+                    Console.WriteLine("Saving goals will clear the current list, type 'no' to cancel\n");
+                    Console.WriteLine("What would you like to call this set of Goals?");
+                    string filename = Console.ReadLine();
+                    if (filename == "no")
+                    {
+                        //Can cancel save if user desires
+                        break;
+                    }
+                    if (!filename.Contains(".txt"))          //I got this from my Develop2 program
+                    {
+                        filename = filename + ".txt";
+                    }
+                    using (StreamWriter File = new StreamWriter(filename))
+                    {
+                        File.WriteLine(Score);
+                        foreach (Goal item in AllGoals)
+                        {
+                            //Save the goal and all it's information to 1 line
+                            if (item is SimpleGoal)
+                            {
+                                File.Write($"SimpleGoal:{item.GetName()}:{item.GetDescription()}:{item.GetScore()}:{item.CheckComplete()}");
+                            }
+                            else if (item is ChecklistGoal)
+                            {
+                                File.Write($"ChecklistGoal:{item.GetName()}:{item.GetDescription}:{item.GetScore()}:{item.CheckComplete()}:{item.GetTimesCompleted()}:{((ChecklistGoal)item).GetTimesToComplete()}");
+                            }
+                            else if (item is EternalGoal)
+                            {
+                                File.Write($"EternalGoal:{item.GetName()}:{item.GetDescription}:{item.GetScore()}:{item.GetTimesCompleted()}");
+                            }
 
+                            if (item.CheckComplete())
+                            {
+                                File.Write($":{item.GetDateCompleted()}"); // Add this onto the line (only works for Simple and Checklist goals)
+                            }
+                            File.WriteLine(); //Go to next line for the next Goal 
+                        }
+                        AllGoals.Clear(); //Clear the current list
+                        Console.Clear();
+                        Console.WriteLine($"-----Goals successfully saved to file '{filename}'-----");
+                        Thread.Sleep(2000);
+                    }
                     break;
 
                 case 4:
                 //Load a Goals list
-                    
+                    Console.WriteLine("Loading goals will clear the current list, type 'no' to cancel\n");
+                    Console.WriteLine("What is the name of the set of Goals you would like to load?");
+                    string fileload = Console.ReadLine();
+                    if (fileload == "no")
+                    {
+                        //Can cancel load if user desires
+                        break;
+                    }
+                    else
+                    {
+                        AllGoals.Clear();
+                    }
+                    if (!fileload.Contains(".txt"))          //I got this from my Develop2 program
+                    {
+                        fileload = fileload + ".txt";
+                    }
+                    //Load the file
+                    string[] lines = System.IO.File.ReadAllLines(fileload);
+                    foreach (string line in lines)
+                    {
+                        if (line == lines[0])
+                        {
+                            //The first line in the file is the Score
+                            Score = int.Parse(line);
+                        }
+                        else
+                        {
+                            //Read the line and make it into a goal class that we add to the AllGoals list
+                            int currentIndex = AllGoals.Count;
+                            string[] parts = line.Split(":");
+                            if(parts[0] == "SimpleGoal")
+                            {
+                                AllGoals.Add(new SimpleGoal(parts[1], parts[2]));
+                                AllGoals[currentIndex].SetScore(int.Parse(parts[3]));
+                                if (parts[4] == "True")
+                                {
+                                    AllGoals[currentIndex].SetComplete(true);
+                                    AllGoals[currentIndex].SetDateCompleted(DateTime.Parse(parts[5]));
+                                }
+                                else
+                                {
+                                    AllGoals[currentIndex].SetComplete(false);
+                                }
+                            }
+                            else if (parts[0] == "ChecklistGoal")
+                            {
+                                AllGoals.Add(new ChecklistGoal(parts[1], parts[2], int.Parse(parts[6])));
+                                AllGoals[currentIndex].SetScore(int.Parse(parts[3]));
+                                AllGoals[currentIndex].SetTimesCompleted(int.Parse(parts[5]));
+                                if (parts[4] == "True")
+                                {
+                                    AllGoals[currentIndex].SetComplete(true);
+                                    AllGoals[currentIndex].SetDateCompleted(DateTime.Parse(parts[5]));
+                                }
+                                else
+                                {
+                                    AllGoals[currentIndex].SetComplete(false);
+                                }
+                            }
+                            else if (parts[0] == "EternalGoal")
+                            {
+                                AllGoals.Add(new EternalGoal(parts[1], parts[2]));
+                                AllGoals[currentIndex].SetScore(int.Parse(parts[3]));
+                                AllGoals[currentIndex].SetTimesCompleted(int.Parse(parts[5]));
+                            }
+                            else
+                            {
+                                Console.WriteLine("Somehow that goal doesn't fit our program");
+                            }
+                        }
+                    }
+                    Console.Clear();
+                    Console.WriteLine("-----Goals Loaded!-----");
+                    Thread.Sleep(2000);
                     break;
 
                 case 5:
@@ -202,6 +317,35 @@ class Program
                     break;
 
                 case 6:
+                //Delete a goal
+                    Console.WriteLine("Type the name of the goal you want to delete:");
+                    string gname = Console.ReadLine();
+                    bool gExists = false;
+                    int gIndex = 0;
+                    for (int i = 0; i < AllGoals.Count; i++)
+                    {
+                        //Check if that name exists
+                        if (AllGoals[i].GetName().ToLower() == gname.ToLower())
+                        {
+                            gExists = true;
+                            gIndex = i;
+                        }
+                    }
+                    Console.Clear(); //Display whether the goal is going to be deleted or not
+                    if(gExists)
+                    {
+                        AllGoals.RemoveAt(gIndex);
+                        Console.WriteLine("-----Goal Deleted-----");
+                        Thread.Sleep(2000);
+                    }
+                    else
+                    {
+                        Console.WriteLine("That goal does not exist! Please check your spelling...");
+                        Thread.Sleep(2000);
+                    }
+                    break;
+
+                case 7:
                 //End the program
                     goaling = false; //Sets the infinite loop to false so it wont repeat
                     Console.WriteLine("Come back soon!");

@@ -2,7 +2,7 @@ public class EternalGoal : Goal
 {
     public EternalGoal(string name, string description) : base(name, description)
     {
-        _complete = false;
+        base.SetComplete(false);
         _pointsAwarded = 100;
     }
 
