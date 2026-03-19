@@ -24,15 +24,15 @@ public class ChecklistGoal : Goal
         {
             base.SetScore(base.GetScore() + _pointsAwarded * 10);
             base.SetComplete(false);
-            base.SetDateCompleted(DateTime.Now);
+            base.SetDateCompleted(DateTime.Now.ToString());
         }
     }
     public override void PrintDetails()
     {
-        Console.Write($"Name: {base.GetName()}\nDescription: {base.GetDescription()}\nCompleted: {_timesCompleted} times\nPoints Earned from this Goal: {base.GetScore()}\nComplete: {base.CheckComplete()}");
+        Console.Write($"Name: {base.GetName()}\nDescription: {base.GetDescription()}\nCompleted: {_timesCompleted} times\nPoints Earned from this Goal: {base.GetScore()}\nComplete: {base.CheckComplete()}\n");
         if (!base.CheckComplete())
         {
-            Console.WriteLine($"Need to complete {_timesToComplete} more times to reach the milestone!\n");
+            Console.WriteLine($"Need to complete {_timesToComplete - GetTimesCompleted()} more times to reach the milestone!\n");
         }
         else
         {

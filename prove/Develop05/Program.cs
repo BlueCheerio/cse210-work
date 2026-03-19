@@ -8,6 +8,9 @@ class Program
     static private int Score = 0;
     static void Main(string[] args)
     {
+        Console.Clear();
+        Console.WriteLine("-----Welcome to the Goal Program-----");
+        Thread.Sleep(3000); //I put this outside the program so that it only prints once
         bool goaling = true;
         while (goaling)
         {
@@ -16,7 +19,6 @@ class Program
             {
                 //Starting menu conditions
                 Console.Clear();
-                Console.WriteLine("-----Welcome to the Goal Program-----");
                 Console.WriteLine("Please select an option:");
                 Console.WriteLine("1. Create a new Goal");
                 Console.WriteLine("2. Report progress on a goal");
@@ -25,6 +27,13 @@ class Program
                 Console.WriteLine("5. Print Goals");
                 Console.WriteLine("6. Delete a Goal");
                 Console.WriteLine("7. Quit Program");
+                int currentx = Console.CursorTop; // save our cursor position
+                //This is to write the score in the top right corner
+                string scoreMessage = $"Score: {Score}";
+                Console.SetCursorPosition(Console.WindowWidth - scoreMessage.Length, 1); //It measures the message to make sure it fits in the corner of the program, I set it to 1 because the initial console height isn't tall enough
+                Console.Write(scoreMessage);
+                Console.SetCursorPosition(0, currentx); 
+                //Write our last line
                 Console.WriteLine("Please input 1-7: ");
                 userInput = Console.ReadLine();
 
@@ -184,19 +193,13 @@ class Program
 
                 case 3:
                 //Save the current Goals list
-                    Console.WriteLine("Saving goals will clear the current list, type 'no' to cancel\n");
                     Console.WriteLine("What would you like to call this set of Goals?");
                     string filename = Console.ReadLine();
-                    if (filename == "no")
-                    {
-                        //Can cancel save if user desires
-                        break;
-                    }
                     if (!filename.Contains(".txt"))          //I got this from my Develop2 program
                     {
                         filename = filename + ".txt";
                     }
-                    using (StreamWriter File = new StreamWriter(filename))
+                    using (StreamWriter File = new StreamWriter(filename.ToLower()))
                     {
                         File.WriteLine(Score);
                         foreach (Goal item in AllGoals)
@@ -221,7 +224,6 @@ class Program
                             }
                             File.WriteLine(); //Go to next line for the next Goal 
                         }
-                        AllGoals.Clear(); //Clear the current list
                         Console.Clear();
                         Console.WriteLine($"-----Goals successfully saved to file '{filename}'-----");
                         Thread.Sleep(2000);
@@ -247,7 +249,7 @@ class Program
                         fileload = fileload + ".txt";
                     }
                     //Load the file
-                    string[] lines = System.IO.File.ReadAllLines(fileload);
+                    string[] lines = System.IO.File.ReadAllLines(fileload.ToLower());
                     foreach (string line in lines)
                     {
                         if (line == lines[0])
@@ -267,7 +269,7 @@ class Program
                                 if (parts[4] == "True")
                                 {
                                     AllGoals[currentIndex].SetComplete(true);
-                                    AllGoals[currentIndex].SetDateCompleted(DateTime.Parse(parts[5]));
+                                    AllGoals[currentIndex].SetDateCompleted(parts[5]);
                                 }
                                 else
                                 {
@@ -282,7 +284,7 @@ class Program
                                 if (parts[4] == "True")
                                 {
                                     AllGoals[currentIndex].SetComplete(true);
-                                    AllGoals[currentIndex].SetDateCompleted(DateTime.Parse(parts[5]));
+                                    AllGoals[currentIndex].SetDateCompleted(parts[7]);
                                 }
                                 else
                                 {
@@ -293,7 +295,7 @@ class Program
                             {
                                 AllGoals.Add(new EternalGoal(parts[1], parts[2]));
                                 AllGoals[currentIndex].SetScore(int.Parse(parts[3]));
-                                AllGoals[currentIndex].SetTimesCompleted(int.Parse(parts[5]));
+                                AllGoals[currentIndex].SetTimesCompleted(int.Parse(parts[4]));
                             }
                             else
                             {

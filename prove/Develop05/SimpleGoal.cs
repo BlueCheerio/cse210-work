@@ -21,7 +21,7 @@ public class SimpleGoal : Goal
         }
         else
         {
-            Console.WriteLine("\n");
+            Console.WriteLine("");
         }
     }
 }

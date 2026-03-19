@@ -6,7 +6,7 @@ public abstract class Goal
     private string _name;
     private string _description;
     private bool _complete;
-    private DateTime _dateCompleted;
+    private string _dateCompleted;
     protected int _timesCompleted; //This variable and the next get called so many times I'll just set them protected
     protected int _pointsAwarded; //This is how many points a player will earn if they complete the goal
 
@@ -27,15 +27,15 @@ public abstract class Goal
     {
         AddPoints();
         _complete = true;
-        _dateCompleted = DateTime.Now;
+        _dateCompleted = DateTime.Now.ToString();
     }
 
     //Getters
-    public DateTime GetDateCompleted()
+    public string GetDateCompleted()
     {
         return _dateCompleted;
     }
-    public virtual int GetTimesCompleted()
+    public int GetTimesCompleted()
     {
         return _timesCompleted;
     }
@@ -61,7 +61,7 @@ public abstract class Goal
     }
 
     //Setters
-    public void SetDateCompleted(DateTime dateCompleted)
+    public void SetDateCompleted(string dateCompleted)
     {
         _dateCompleted = dateCompleted;
     }
