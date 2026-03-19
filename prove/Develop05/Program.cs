@@ -211,11 +211,11 @@ class Program
                             }
                             else if (item is ChecklistGoal)
                             {
-                                File.Write($"ChecklistGoal:{item.GetName()}:{item.GetDescription}:{item.GetScore()}:{item.CheckComplete()}:{item.GetTimesCompleted()}:{((ChecklistGoal)item).GetTimesToComplete()}");
+                                File.Write($"ChecklistGoal:{item.GetName()}:{item.GetDescription()}:{item.GetScore()}:{item.CheckComplete()}:{item.GetTimesCompleted()}:{((ChecklistGoal)item).GetTimesToComplete()}");
                             }
                             else if (item is EternalGoal)
                             {
-                                File.Write($"EternalGoal:{item.GetName()}:{item.GetDescription}:{item.GetScore()}:{item.GetTimesCompleted()}");
+                                File.Write($"EternalGoal:{item.GetName()}:{item.GetDescription()}:{item.GetScore()}:{item.GetTimesCompleted()}");
                             }
 
                             if (item.CheckComplete())

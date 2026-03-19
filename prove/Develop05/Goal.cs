@@ -26,7 +26,7 @@ public abstract class Goal
     public virtual void MarkComplete()
     {
         AddPoints();
-        _complete = true;
+        SetComplete(true);
         _dateCompleted = DateTime.Now.ToString();
     }
 

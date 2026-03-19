@@ -23,7 +23,7 @@ public class ChecklistGoal : Goal
         else if (_timesCompleted == _timesToComplete)
         {
             base.SetScore(base.GetScore() + _pointsAwarded * 10);
-            base.SetComplete(false);
+            base.SetComplete(true);
             base.SetDateCompleted(DateTime.Now.ToString());
         }
     }
