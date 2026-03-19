@@ -67,7 +67,7 @@ public abstract class Goal
     }
     public void SetTimesCompleted(int timesCompleted)
     {
-        
+        _timesCompleted = timesCompleted;
     }
     public void SetScore(int points)
     {
